@@ -1,0 +1,22 @@
+version: '2.3'
+
+# ref: https://github.com/Dreamacro/clash/wiki/Run-clash-in-docker
+
+services:
+  ui:
+    image: haishanh/yacd:latest
+    container_name: ui
+    ports:
+      - "1234:80"
+
+  clash:
+    image: clash:latest
+    container_name: clash
+    # build: .
+    # restart: always
+    volumes:
+      - ./config.yaml:/root/.config/clash/config.yaml:ro
+    ports:
+      - "9090:9090"
+      - "17890:17890"
+      - "17891:17891"
